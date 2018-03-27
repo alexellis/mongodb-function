@@ -112,6 +112,16 @@ An alternative tool would be Apache-Bench which is available for most Linux dist
 
 5. Run a test
 
+Let's start by running a single request with `curl`:
+
+```
+$ curl http://$OPENFAAS_URL/function/insert-user \
+  --data-binary '{"first":"Alex", "last": "Ellis"}' \
+  -H "Content-Type: application/json"
+```
+
+Now run a load-test with `hey`:
+
 ```
 $ ~/go/bin/hey -m POST -d '{"first":"Alex", "last": "Ellis"}' \
   -H "Content-Type: application/json" \
