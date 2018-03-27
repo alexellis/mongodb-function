@@ -28,8 +28,7 @@ let prepareDB = () => {
 
 module.exports = (event, context) => {
     prepareDB()
-    .then(() => {
-        let users = clientsDB;
+    .then((users) => {
         let record = {"name": event.body };
 
         users.collection("users").insertOne(record, (insertErr) => {
@@ -45,5 +44,8 @@ module.exports = (event, context) => {
                 .status(200)
                 .succeed(result);
         });
+    })
+    .catch(err => {
+        context.fail(err.toString());
     });
 }

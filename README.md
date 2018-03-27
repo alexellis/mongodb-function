@@ -37,10 +37,14 @@ If you're using minikube or a remote machine then replace 127.0.0.1 with that IP
 * 4. Install mongodb via helm
 
 ```
-$ helm install stable/mongodb --set persistence.enabled=false
+$ helm install stable/mongodb --name openfaas-db \
+  --namespace openfaas-fn \
+  --set persistence.enabled=false
 ```
+x
+Note down the name of the MongoDB instance i.e. `openfaas-db-mongodb`
 
-Note down the qualified name of the MongoDB instance i.e. `waxen-squid-mongodb.default.svc.cluster.local.`
+> If you want to use the fully-qualified DNS name that would be: `openfaas-db-mongodb.openfaas-fn.svc.cluster.local.`
 
 Now skip ahead to "Build and test"
 
@@ -65,7 +69,7 @@ $ export OPENFAAS_URL=127.0.0.1:8080
 * 4. Create a mongodb Docker Service
 
 ```
-$ docker service create --network=func_functions --name mongo --publish 27017:27017 mongo mongod
+$ docker service create --network=func_functions --name openfaas-db-mongodb --publish 27017:27017 mongo mongod
 ```
 
 The entry for the stack.yml file will be the IP of your Docker Swarm manager.
@@ -125,11 +129,12 @@ If you look at the logs of the Mongo deployment or service you will see the conn
 On Kubernetes:
 
 ```
-kubectl logs deploy/waxen-squid-mongodb -f
+$ kubectl logs deploy/openfaas-db-mongodb -f -n openfaas-fn
 ```
 
 On Swarm:
 
 ```
-docker service logs mongo -f
+$ docker service logs openfaas-db-mongodb -f
 ```
+
