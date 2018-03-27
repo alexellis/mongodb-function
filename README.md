@@ -103,7 +103,9 @@ An alternative tool would be Apache-Bench which is available for most Linux dist
 * 5. Run a test
 
 ```
-$ ~/go/bin/hey -m POST -d '{"first":"alex"}'  -n 10000 -c 100 http://$OPENFAAS_URL/function/insert-user
+$ ~/go/bin/hey -m POST -d '{"first":"Alex", "last": "Ellis"}' \
+  -H "Content-Type: application/json" \
+  -n 10000 -c 100 http://$OPENFAAS_URL/function/insert-user
 ```
 
 This test posts in a JSON body with 10000 requests with 100 of those being concurrent.
