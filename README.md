@@ -109,10 +109,10 @@ An alternative tool would be Apache-Bench which is available for most Linux dist
 ```
 $ ~/go/bin/hey -m POST -d '{"first":"Alex", "last": "Ellis"}' \
   -H "Content-Type: application/json" \
-  -n 10000 -c 100 http://$OPENFAAS_URL/function/insert-user
+  -n 1000 -c 10 http://$OPENFAAS_URL/function/insert-user
 ```
 
-This test posts in a JSON body with 10000 requests with 100 of those being concurrent.
+This test posts in a JSON body with 1000 requests with 10 of those being concurrent.
 
 Here's an abridged output from `hey` with the function running on a remote server with the test being run from my laptop:
 
