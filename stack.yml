@@ -1,0 +1,14 @@
+provider:
+  name: faas
+  gateway: http://127.0.0.1:8080
+
+functions:
+  insert-user:
+    lang: node8-express
+    handler: ./insert-user
+    image: alexellis2/insert-user
+    environment:
+      write_timeout: 10s
+      read_timeout: 10s
+      mongo: waxen-squid-mongodb.default.svc.cluster.local.
+      # mongo: 192.168.0.35
