@@ -16,17 +16,17 @@ Before we can build and deploy the example we'll set up OpenFaaS on Kubernetes o
 
 ### Kubernetes
 
-* 1. Install OpenFaaS with helm
+1. Install OpenFaaS with helm
 
 https://docs.openfaas.com/deployment/kubernetes/
 
-* 2. Install the OpenFaaS CLI
+2. Install the OpenFaaS CLI
 
 ```bash
 curl -sL https://cli.openfaas.com | sudo sh
 ```
 
-* 3. Set your OPENFAAS_URL variable
+3. Set your OPENFAAS_URL variable
 
 ```
 $ export OPENFAAS_URL=127.0.0.1:31112
@@ -34,7 +34,7 @@ $ export OPENFAAS_URL=127.0.0.1:31112
 
 If you're using minikube or a remote machine then replace 127.0.0.1 with that IP address.
 
-* 4. Install mongodb via helm
+4. Install mongodb via helm
 
 ```
 $ helm install stable/mongodb --name openfaas-db \
@@ -50,23 +50,23 @@ Now skip ahead to "Build and test"
 
 ### Docker Swarm
 
-* 1. Install OpenFaaS with Docker
+1. Install OpenFaaS with Docker
 
 https://docs.openfaas.com/deployment/docker-swarm/
 
-* 2. Install the OpenFaaS CLI
+2. Install the OpenFaaS CLI
 
 ```bash
 curl -sL https://cli.openfaas.com | sudo sh
 ```
 
-* 3. Set your OPENFAAS_URL variable
+3. Set your OPENFAAS_URL variable
 
 ```
 $ export OPENFAAS_URL=127.0.0.1:8080
 ```
 
-* 4. Create a mongodb Docker Service
+4. Create a mongodb Docker Service
 
 ```
 $ docker service create --network=func_functions --name openfaas-db-mongodb --publish 27017:27017 mongo mongod
@@ -76,11 +76,11 @@ The entry for the stack.yml file will be the IP of your Docker Swarm manager.
 
 ### Build and test
 
-* 1. Update your stack.yml's mongo field with the MongoDB DNS entry/IP from prior steps
+1. Update your stack.yml's mongo field with the MongoDB DNS entry/IP from prior steps
 
-* 2. Replace "alexellis/" prefix from Docker Hub in stack.yml with your own account
+2. Replace "alexellis/" prefix from Docker Hub in stack.yml with your own account
 
-* 3. Build/push/deploy
+3. Build/push/deploy
 
 Pull in the *node8-express* template:
 
@@ -94,7 +94,7 @@ Now build and push / deploy
 $ faas build && faas push && faas deploy
 ```
 
-* 4. Get a load-testing tool
+4. Get a load-testing tool
 
 This requires a [local installation of Go](https://golang.org/dl/).
 
@@ -104,7 +104,7 @@ $ go get -u github.com/rakyll/hey
 
 An alternative tool would be Apache-Bench which is available for most Linux distributions via a package manager.
 
-* 5. Run a test
+5. Run a test
 
 ```
 $ ~/go/bin/hey -m POST -d '{"first":"Alex", "last": "Ellis"}' \
