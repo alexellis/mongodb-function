@@ -14,9 +14,15 @@ This is a simple example of how to use connection pooling in MongoDB with OpenFa
 
 Before we can build and deploy the example we'll set up OpenFaaS on Kubernetes or Swarm followed by MongoDB. This configuration is suitable for development and testing.
 
+1. Start by cloning the Github repository:
+
+```
+$ git clone https://github.com/alexellis/mongodb-function
+```
+
 ### Kubernetes
 
-1. Install OpenFaaS with helm
+1. Install OpenFaaS with `helm`
 
 https://docs.openfaas.com/deployment/kubernetes/
 
@@ -26,7 +32,7 @@ https://docs.openfaas.com/deployment/kubernetes/
 curl -sL https://cli.openfaas.com | sudo sh
 ```
 
-3. Set your OPENFAAS_URL variable
+3. Set your `OPENFAAS_URL` variable
 
 ```
 $ export OPENFAAS_URL=127.0.0.1:31112
@@ -34,14 +40,14 @@ $ export OPENFAAS_URL=127.0.0.1:31112
 
 If you're using minikube or a remote machine then replace 127.0.0.1 with that IP address.
 
-4. Install mongodb via helm
+4. Install mongodb via `helm`
 
-```
+```shell
 $ helm install stable/mongodb --name openfaas-db \
   --namespace openfaas-fn \
   --set persistence.enabled=false
 ```
-x
+
 Note down the name of the MongoDB instance i.e. `openfaas-db-mongodb`
 
 > If you want to use the fully-qualified DNS name that would be: `openfaas-db-mongodb.openfaas-fn.svc.cluster.local.`
@@ -60,7 +66,7 @@ https://docs.openfaas.com/deployment/docker-swarm/
 curl -sL https://cli.openfaas.com | sudo sh
 ```
 
-3. Set your OPENFAAS_URL variable
+3. Set your `OPENFAAS_URL` variable
 
 ```
 $ export OPENFAAS_URL=127.0.0.1:8080
